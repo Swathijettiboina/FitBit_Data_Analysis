@@ -1,0 +1,23 @@
+Hello, Sorry for troubling you in weekend.
+i am having few doubts regarding this use case, as per our previous meet , you said that you are leading the bussiness called FitBit,
+and your are having some data, now to move further, i need some clarifications about the bussiness,customers and end goals
+they are-----
+
+1.Can you briefly describe what your company does?
+2.What products or services do you offer to your customers?
+3.Who are your target customers or users?
+4.What is your business model (e.g., subscriptions, product sales, partnerships)?
+
+Goals for the Data
+1.What is the main business goal you want to achieve using this dataset?
+2.Are you looking for insights, dashboards, or a full analytics product?
+3.Do you want real-time analysis or periodic reports (e.g., daily, weekly)?
+4.Do you already have KPIs or metrics that matter most to your business?
+5.Is the data collected from your own application or third-party devices or using any survey?
+6.Are there known issues with data quality or consistency that I should be aware of?
+
+Deliverables
+1.What do you expect as the final outcome of my work?
+2.A report? Dashboard? Data pipeline? Model?
+3.Who will be using the output — business leaders, data analysts, or end users?
+4.Do you have preferred tools or tech stacks you want me to use?

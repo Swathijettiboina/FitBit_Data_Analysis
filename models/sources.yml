@@ -1,0 +1,38 @@
+version: 2
+
+sources:
+  - name: RAW_LAYER
+    description: "Source tables for fitbit data"
+    database: FITBIT
+    schema: RAW_LAYER
+
+    tables:
+      - name: dailyactivity_merged_3_12
+      - name: dailyactivity_merged_4_12
+      - name: dailycalories_merged_4_12 
+      - name: dailyintensities_merged_4_12
+      - name: dailysteps_merged_4_12
+      - name: heartrate_seconds_merged_3_12
+      - name: heartrate_seconds_merged_4_12
+      - name: hourlycalories_merged_3_12
+      - name: hourlycalories_merged_4_12
+      - name: hourlyintensities_merged_3_12
+      - name: hourlyintensities_merged_4_12
+      - name: hourlysteps_merged_3_12
+      - name: hourlysteps_merged_4_12
+      - name: minutecaloriesnarrow_merged_3_12
+      - name: minutecaloriesnarrow_merged_4_12
+      - name: minutecalorieswide_merged_4_12
+      - name: minuteintensitiesnarrow_merged_3_12
+      - name: minuteintensitiesnarrow_merged_4_12
+      - name: minuteintensitieswide_merged_4_12
+      - name: minutemetsnarrow_merged_3_12
+      - name: minutemetsnarrow_merged_4_12
+      - name: minutesleep_merged_3_12
+      - name: minutesleep_merged_4_12
+      - name: minutestepsnarrow_merged_3_12
+      - name: minutestepsnarrow_merged_4_12
+      - name: minutestepswide_merged_4_12
+      - name: sleepday_merged_4_12
+      - name: weightloginfo_merged_3_12
+      - name: weightloginfo_merged_4_12
