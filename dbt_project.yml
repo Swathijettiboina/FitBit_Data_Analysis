@@ -34,12 +34,15 @@ models:
     # Config indicated by + and applies to all files under models/example/
     # example:
     #   +materialized: view
-    bronze:
-      +materialized: view
-      +schema: bronze
-    silver:
+    staging:
       +materialized: table
-      +schema: silver
-    gold:
+      +schema: staging
+    mart:
       +materialized: table
-      +schema: gold
+      +schema: mart
+    reporting:
+      +materialized: table
+      +schema: reporting
+    core:
+      +materialized: table
+      +schema: core

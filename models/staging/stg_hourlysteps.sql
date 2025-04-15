@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags = ['bronze', 'hourlysteps', 'br'],
+    tags = ['stage', 'hourlysteps', 'br'],
     description = 'Step count per hour from Fitbit, merged from datasets, with timestamps standardized to YYYY-MM-DD HH24:MI:SS format.'
 ) }}
 

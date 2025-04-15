@@ -1,0 +1,15 @@
+1.total steps for each user on each day
+2.total calories burned by a user in a given day.
+3.the average heart rate of the user for each day or minute.
+4.calculate the total active minutes for a user on each day.
+5.the total sedentary minutes for a user during the day.
+6.total minutes a user spends sleeping during the night.
+7.calculate the total distance traveled by a user throughout the day.
+8.calculate the total minutes spent in each intensity zone for the user.
+9.the body weight metrics for the user(weight, bmi)
+10.calculate the number of active days in a given period.
+11.calculate the calories burned per minute during an activity.
+12.calculate the number of steps per calorie burned.
+13.compare the total steps taken against the recommended goal (eg: 5,000 steps).
+14.1the efficiency of sleep =>the ratio of actual sleep time to time in bed.
+15.calculate the average heart rate variability.

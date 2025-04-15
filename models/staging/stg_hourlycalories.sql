@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags = ['bronze', 'hourlycalories', 'br'],
+    tags = ['stage', 'hourlycalories', 'br'],
     description = 'Calories data per hour from Fitbit, merged from datasets, with timestamps standardized to YYYY-MM-DD HH24:MI:SS format.'
 ) }}
 

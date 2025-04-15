@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags = ['bronze', 'minuteintensitieswide', 'br'],
+    tags = ['stage', 'minuteintensitieswide', 'br'],
     description = 'Minute-level intensity data in wide format from Fitbit merged April dataset with timestamps standardized to YYYY-MM-DD HH24:MI:SS format.'
 ) }}
 

@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags = ['bronze', 'minutestepswide', 'br'],
+    tags = ['stage', 'minutestepswide', 'br'],
     description = 'Minute-level steps wide data from Fitbit, merged from datasets with hourly steps recorded.'
 ) }}
 

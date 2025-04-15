@@ -1,7 +1,7 @@
 {{
     config(
         materialized='table',
-        tags=['gold', 'fact_minute_activity'],
+        tags=['mart', 'fact_minute_activity'],
         description='Minute-level fact table aggregating Fitbit activity data for users.'
     )
 }}
@@ -23,19 +23,19 @@ minute_data AS (
         COALESCE(fhr.VALUE, 0)                  AS heart_rate,
         COALESCE(fsleep.VALUE, 0)               AS total_sleep
     FROM user_calendar AS uc
-    LEFT JOIN {{ ref('br_minutecalories') }}            AS fc
+    LEFT JOIN {{ ref('stg_minutecalories') }}            AS fc
         ON uc.user_id = fc.ID
         AND uc.minute_timestamp = fc.ACTIVITYMINUTE
-    LEFT JOIN {{ ref('br_minutestepsnarrow') }}         AS fs
+    LEFT JOIN {{ ref('stg_minutestepsnarrow') }}         AS fs
         ON uc.user_id = fs.ID
         AND uc.minute_timestamp = fs.ACTIVITYMINUTE
-    LEFT JOIN {{ ref('br_minuteintensitiesnarrow') }}   AS fi
+    LEFT JOIN {{ ref('stg_minuteintensitiesnarrow') }}   AS fi
         ON uc.user_id = fi.ID
         AND uc.minute_timestamp = fi.ACTIVITYMINUTE
-    LEFT JOIN {{ ref('br_heartrateseconds') }}          AS fhr
+    LEFT JOIN {{ ref('stg_heartrateseconds') }}          AS fhr
         ON uc.user_id = fhr.ID
         AND uc.minute_timestamp = fhr.TIME
-    LEFT JOIN {{ ref('br_minutesleep') }}               AS fsleep
+    LEFT JOIN {{ ref('stg_minutesleep') }}               AS fsleep
         ON uc.user_id = fsleep.ID
         AND uc.minute_timestamp = fsleep.DATE
 ),

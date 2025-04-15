@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags         = ['silver', 'fact_hourlyactivity'],
+    tags         = ['mart', 'fact_hourlyactivity'],
     description  = 'Hourly activity data from Fitbit merged with user data, combining calories, steps, intensity, and average heart rate per user per hour.'
 ) }}
 
@@ -33,7 +33,7 @@ cte_calories AS (
         id           AS user_id,  
         activityhour AS activity_hour, 
         calories     AS calories
-    FROM {{ ref('br_hourlycalories') }}
+    FROM {{ ref('stg_hourlycalories') }}
 ),
 
 -- Hourly steps data
@@ -42,7 +42,7 @@ cte_steps AS (
         id           AS user_id,  
         activityhour AS activity_hour, 
         steptotal   AS steps
-    FROM {{ ref('br_hourlysteps') }}
+    FROM {{ ref('stg_hourlysteps') }}
 ),
 
 -- Hourly intensity data
@@ -52,7 +52,7 @@ cte_intensities AS (
         activityhour AS activity_hour, 
         totalintensity    AS total_intensity,
         averageintensity    AS average_intensity,
-    FROM {{ ref('br_hourlyintensities') }}
+    FROM {{ ref('stg_hourlyintensities') }}
 ),
 
 -- Hourly average heart rate
@@ -61,7 +61,7 @@ cte_heartrate AS (
         id                        AS user_id,
         DATE_TRUNC('HOUR', time) AS activity_hour,
         AVG(value)               AS avg_heart_rate
-    FROM {{ ref('br_heartrateseconds') }}
+    FROM {{ ref('stg_heartrateseconds') }}
     GROUP BY user_id, activity_hour
 ),
 

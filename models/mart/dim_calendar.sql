@@ -1,7 +1,7 @@
 {{
     config(
         materialized='table',
-        tags=['silver', 'calendar', 'dim'],
+        tags=['mart', 'calendar', 'dim'],
         description='Calendar dimension with full timestamps down to the second level, and hour/minute references.'
     )
 }}
@@ -10,7 +10,7 @@ WITH date_bounds AS (
     SELECT 
         DATE_TRUNC('second', MIN(CAST(activitydate AS TIMESTAMP))) AS min_datetime,
         DATE_TRUNC('second', MAX(CAST(activitydate AS TIMESTAMP))) + INTERVAL '1 second' AS max_datetime
-    FROM {{ ref('br_dailyactivity') }}
+    FROM {{ ref('stg_dailyactivity') }}
 ),
 
 datetime_series AS (

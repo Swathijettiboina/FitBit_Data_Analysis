@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags = ['bronze', 'minutestepsnarrow', 'br'],
+    tags = ['stage', 'minutestepsnarrow', 'br'],
     description = 'Minute-level steps data from Fitbit, merged from datasets, with timestamps standardized to YYYY-MM-DD HH24:MI:SS format.'
 ) }}
 

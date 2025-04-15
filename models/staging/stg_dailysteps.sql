@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags = ['bronze', 'dailysteps', 'br'],
+    tags = ['stage', 'dailysteps', 'br'],
     description = 'Daily steps data from Fitbit, cleaned and cast to standard formats.'
 ) }}
 

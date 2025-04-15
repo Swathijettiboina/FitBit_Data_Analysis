@@ -1,7 +1,7 @@
 {{
     config(
         materialized='table',
-        tags=['silver', 'dim_users'],
+        tags=['mart', 'dim_users'],
         description='Dimension table to store unique users with their first and last activity dates.'
     )
 }}
@@ -11,28 +11,28 @@ WITH cte_all_users AS (
     SELECT 
         id              AS user_id, 
         activitydate    AS activityday
-    FROM {{ ref('br_dailyactivity') }}
+    FROM {{ ref('stg_dailyactivity') }}
     
     UNION
     
     SELECT 
         id AS user_id, 
         activityday
-    FROM {{ ref('br_dailycalories') }}
+    FROM {{ ref('stg_dailycalories') }}
     
     UNION
     
     SELECT 
         id AS user_id, 
         activityday
-    FROM {{ ref('br_dailyintensities') }}
+    FROM {{ ref('stg_dailyintensities') }}
     
     UNION
     
     SELECT 
         id AS user_id, 
         activityday
-    FROM {{ ref('br_dailysteps') }}
+    FROM {{ ref('stg_dailysteps') }}
 ),
 
 user_activity_dates AS (

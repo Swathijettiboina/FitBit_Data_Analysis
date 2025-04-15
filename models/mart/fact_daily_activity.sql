@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags         = ['silver', 'fact_dailyactivity'],
+    tags         = ['mart', 'fact_dailyactivity'],
     description  = 'Daily activity data from Fitbit merged with user data and combining the two files into one.'
 ) }}
 
@@ -38,7 +38,7 @@ cte_activity AS (
         fairlyactiveminutes   AS fairly_active_minutes,
         lightlyactiveminutes  AS lightly_active_minutes,
         calories              AS total_calories
-    FROM {{ ref('br_dailyactivity') }}
+    FROM {{ ref('stg_dailyactivity') }}
 ),
 
 -- Daily calories from another source
@@ -47,7 +47,7 @@ cte_calories AS (
         id            AS user_id,  
         activityday   AS activity_date, 
         calories      AS daily_calories
-    FROM {{ ref('br_dailycalories') }}
+    FROM {{ ref('stg_dailycalories') }}
 ),
 
 -- Daily intensities (active minutes)
@@ -58,7 +58,7 @@ cte_intensities AS (
         veryactiveminutes     AS very_active_minutes, 
         fairlyactiveminutes   AS fairly_active_minutes, 
         lightlyactiveminutes  AS lightly_active_minutes
-    FROM {{ ref('br_dailyintensities') }}
+    FROM {{ ref('stg_dailyintensities') }}
 ),
 
 -- Daily step count
@@ -67,7 +67,7 @@ cte_steps AS (
         id          AS user_id,  
         activityday AS activity_date, 
         steptotal   AS total_steps
-    FROM {{ ref('br_dailysteps') }}
+    FROM {{ ref('stg_dailysteps') }}
 ),
 
 -- Final merged dataset

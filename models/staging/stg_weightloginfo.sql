@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags = ['bronze', 'weightloginfo', 'br'],
+    tags = ['stage', 'weightloginfo', 'br'],
     description = 'Merged weight log information data from Fitbit, standardized with correct data types.'
 ) }}
 

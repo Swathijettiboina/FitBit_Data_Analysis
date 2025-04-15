@@ -1,6 +1,6 @@
 {{ config(
     materialized='table',
-    tags=['bronze', 'dailyintensities', 'intensities'],
+    tags=['stage', 'dailyintensities', 'intensities'],
     description='Daily intensities data from Fitbit, cleaned and cast to standard formats.'
 ) }}
 

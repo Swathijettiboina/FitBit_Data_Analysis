@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags = ['bronze', 'sleepday', 'br'],
+    tags = ['stage', 'sleepday', 'br'],
     description = 'Day-level sleep data from Fitbit, merged from datasets with sleep records, total minutes asleep, and time in bed.'
 ) }}
 

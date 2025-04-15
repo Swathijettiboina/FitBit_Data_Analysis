@@ -1,6 +1,6 @@
 {{ config(
     materialized='table',
-    tags=['bronze', 'dailyactivity'],
+    tags=['stage', 'dailyactivity'],
     description='Daily activity data from Fitbit merged with user data and combining the two files into one.'
 ) }}
 

@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags = ['bronze', 'minutesleep', 'br'],
+    tags = ['stage', 'minutesleep', 'br'],
     description = 'Minute-level sleep data from Fitbit, merged from datasets, with timestamps standardized to YYYY-MM-DD HH24:MI:SS format.'
 ) }}
 

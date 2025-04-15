@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags = ['bronze', 'minutemetsnarrow', 'br'],
+    tags = ['stage', 'minutemetsnarrow', 'br'],
     description = 'Merged intensity data from Fitbit, with standardized timestamps and METs values.'
 ) }}
 

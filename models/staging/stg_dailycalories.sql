@@ -1,6 +1,6 @@
 {{ config(
     materialized='table',
-    tags=['bronze', 'dailycalories', 'br'],
+    tags=['stage', 'dailycalories', 'br'],
     description='Daily calories data from Fitbit, cleaned and cast to standard formats.'
 ) }}
 

@@ -3,13 +3,13 @@ import pandas as pd
 import snowflake.connector
 
 base_paths = {
-    "_3_12": r"C:\Users\HP\Documents\JMAN Training\DBT\FitBit\Fitabase Data 3.12.16-4.11.16",
-    "_4_12": r"C:\Users\HP\Documents\JMAN Training\DBT\FitBit\Fitabase Data 4.12.16-5.12.16"
+    "_3_12": r"C:\Users\SwathiJettiboina\Documents\Final-project\mturkfitbit_export_3.12.16-4.11.16\Fitabase Data 3.12.16-4.11.16",
+    "_4_12": r"C:\Users\SwathiJettiboina\Documents\Final-project\mturkfitbit_export_4.12.16-5.12.16\Fitabase Data 4.12.16-5.12.16"
 }
 
-schema_name = "RAW_LAYER"  # Store tables in RAW_LAYER schema
-file_format_name = "staging.my_csv_format"  
-stage_base_path = "@staging.FITBIT_STAGE"
+schema_name = "RAW"  # Store tables in RAW_LAYER schema
+file_format_name = "raw_layer.my_csv_format"  
+stage_base_path = "@raw_layer.FITBIT_DATA"
 
 conn = snowflake.connector.connect(
     user='SWATHIJETTIBOINA',

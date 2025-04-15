@@ -1,6 +1,6 @@
 {{ config(
     materialized = 'table',
-    tags = ['bronze', 'heartrate', 'br'],
+    tags = ['stage', 'heartrate', 'br'],
     description = 'Heart rate per second data from Fitbit, merged from March and April datasets, with timestamps standardized to YYYY-MM-DD HH24:MI:SS format.'
 ) }}
 

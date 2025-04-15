@@ -12,11 +12,11 @@ conn = snowflake.connector.connect(
 cs = conn.cursor()
 
 try:
-    # Fetch all table names from STAGING schema
+    # Fetch all table names from RAW schema
     cs.execute("""
         SELECT TABLE_NAME 
         FROM INFORMATION_SCHEMA.TABLES 
-        WHERE TABLE_SCHEMA = 'STAGING' AND TABLE_TYPE = 'BASE TABLE';
+        WHERE TABLE_SCHEMA = 'RAW' AND TABLE_TYPE = 'BASE TABLE';
     """)
     tables = cs.fetchall()
 
