@@ -95,41 +95,6 @@ models:
           - accepted_values:
               values: ['Sedentary Active', 'Lightly Active', 'Moderately Active', 'Extremely Active']
 
-  - name: report_sleep_weight_analysis
-    description: "This model aggregates sleep and weight data from the FitBit dataset. It provides insights into the user's sleep patterns, weight trends, and health status. The data is grouped by user ID and date."
-    columns:
-      - name: user_id
-        description: "Unique identifier for each user in the FitBit dataset."
-        tests:
-          - not_null
-      - name: activity_date
-        description: "The date of the activity in the timestamp format."
-        tests:
-          - not_null
-      - name: total_sleep_records
-        description: "The total number of sleep records for the user on the given date."
-      - name: total_minutes_asleep
-        description: "The total number of minutes the user was asleep on the given date."
-      - name: total_time_in_bed
-        description: "The total time spent in bed by the user on the given date."
-      - name: sleep_efficiency
-        description: "The efficiency of the user's sleep, calculated as a percentage."
-      - name: health_status
-        description: "The health status of the user, categorized as 'Healthy', 'Unhealthy', or 'At Risk'."
-        tests:
-          - accepted_values:
-              values: ['Healthy', 'Unhealthy', 'At Risk']
-      - name: avg_weight_kg
-        description: "The average weight of the user in kilograms."
-      - name: avg_bmi_score
-        description: "The average Body Mass Index (BMI) score of the user."
-      - name: weight_trend
-        description: "The trend of the user's weight, categorized as 'Gaining', 'Losing', or 'Stable'."
-      - name: days_since_previous
-        description: "The number of days since the user's previous weight record."
-      - name: prev_weight
-        description: "The previous weight of the user in kilograms."
-
   - name: report_daily_activity_analysis
     description: "This model aggregates daily activity data from the FitBit dataset. It provides insights into the user's daily activity levels, including steps taken, calories burned, and distance covered. The data is grouped by user ID and date."
     columns: 
@@ -198,3 +163,8 @@ models:
         description: "The total number of active minutes on the given date."
       - name: calories_per_step
         description: "The number of calories burned per step taken by the user on the given date."
+
+tests:
+  - dbt_expectations.expect_column_values_to_be_in_set:
+      column: granularity
+      value_set: ['minute', 'hour', 'day']

@@ -4,7 +4,6 @@
     description="This table contains user-level information including the first and last activity dates.",
     unique_key='user_id',
     incremental_strategy='insert_overwrite',
-    partition_by=['user_id'],
     post_hook=[
         """
         update {{ this }}

@@ -1,7 +1,7 @@
 {{
     config(
         materialized='table',
-        tags=['core', 'daily_sleep_activity', 'physical'],
+        tags=['core', 'int_daily_sleep_activity', 'physical'],
         description="This table contains daily sleep activity data from Fitbit devices, and it has sleep quality metrics."
     )
 }}
