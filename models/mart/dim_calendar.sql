@@ -25,19 +25,16 @@ datetime_series AS (
 )
 
 SELECT 
-    -- Primary structure (in requested order)
     CAST(minute_timestamp AS DATE)         AS date,
     DATE_TRUNC('hour', minute_timestamp)   AS hour_timestamp,
     DATE_TRUNC('minute', minute_timestamp) AS minute_timestamp,
 
-    -- Date and time components
     EXTRACT(YEAR FROM minute_timestamp)    AS year,
     EXTRACT(MONTH FROM minute_timestamp)   AS month,
     EXTRACT(DAY FROM minute_timestamp)     AS day,
     EXTRACT(HOUR FROM minute_timestamp)    AS hour,
     EXTRACT(MINUTE FROM minute_timestamp)  AS minute,
 
-    -- Additional context
     DAYNAME(CAST(minute_timestamp AS DATE))   AS weekday_name, 
     MONTHNAME(CAST(minute_timestamp AS DATE))  AS month_name,   
     EXTRACT(DOW FROM minute_timestamp)        AS day_of_week_num,

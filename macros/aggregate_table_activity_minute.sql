@@ -1,11 +1,11 @@
 {% macro aggregate_table_by_minute(table_name, column_name, time_granularity='hour', renamed_column_name=None) %}
     {% set time_truncation %}
         {% if time_granularity == 'hour' %}
-            DATE_TRUNC('hour', ACTIVITYMINUTE)  -- Truncates to the hour
+            DATE_TRUNC('hour', ACTIVITYMINUTE)  
         {% elif time_granularity == 'minute' %}
-            DATE_TRUNC('minute', ACTIVITYMINUTE)  -- Truncates to the minute
+            DATE_TRUNC('minute', ACTIVITYMINUTE)  
         {% elif time_granularity == 'day' %}
-            DATE_TRUNC('day', ACTIVITYMINUTE)  -- Truncates to the day
+            DATE_TRUNC('day', ACTIVITYMINUTE) 
         {% else %}
             -- Default to hour if an invalid time granularity is provided
             DATE_TRUNC('minute', ACTIVITYMINUTE)

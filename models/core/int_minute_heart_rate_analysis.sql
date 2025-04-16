@@ -26,7 +26,6 @@ SELECT
     h.max_heart_rate,
     h.heart_rate_readings,
 
-    -- Derived metrics
     CASE
         WHEN h.avg_heart_rate BETWEEN 0 AND 59    THEN 'Resting'
         WHEN h.avg_heart_rate BETWEEN 60 AND 79   THEN 'Warm-up'

@@ -25,8 +25,17 @@ SELECT
     da.light_activity_percent,
     s.step_count_level_id,
     calorie.calorie_level_id
-FROM {{ ref('int_daily_activity') }} da
-JOIN {{ ref('dim_users') }} u ON da.user_id = u.user_id
-JOIN {{ ref('dim_calendar') }} c ON da.activity_date = c.date
-JOIN {{ ref('dim_step_count_level') }} s ON da.step_count_level = s.step_count_level
-JOIN {{ ref('dim_calorie_burn_level') }} calorie ON da.calorie_burner_level = calorie.calorie_burn_level
+FROM 
+    {{ ref('int_daily_activity') }} da
+LEFT JOIN 
+    {{ ref('dim_users') }} u 
+    ON da.user_id = u.user_id
+LEFT JOIN 
+    {{ ref('dim_calendar') }} c 
+    ON da.activity_date = c.date
+LEFT JOIN 
+    {{ ref('dim_step_count_level') }} s 
+    ON da.step_count_level = s.step_count_level
+LEFT JOIN 
+    {{ ref('dim_calorie_burn_level') }} calorie 
+    ON da.calorie_burner_level = calorie.calorie_burn_level

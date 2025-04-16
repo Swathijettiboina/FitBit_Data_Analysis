@@ -2,7 +2,7 @@
     config(
         materialized='table',
         unique_key='id',
-        tags=['fact', 'daily', 'physical', 'metrics',"dpm",'mart'],
+        tags=['fact', 'fact_daily', 'physical', 'metrics',"dpm",'mart'],
         description="This table contains daily physical metrics data from Fitbit."
     )
 }}
@@ -21,9 +21,9 @@ SELECT
     pat.personal_activity_tag_id
 FROM 
     {{ ref('int_daily_physical_metrics') }} dp
-JOIN 
+LEFT JOIN 
     {{ ref('dim_users') }} u ON dp.user_id = u.user_id
-JOIN 
+LEFT JOIN 
     {{ ref('dim_calendar') }} c ON dp.activity_date = c.date
-JOIN 
+LEFT JOIN 
     {{ ref('dim_personal_activity_tag') }} pat ON dp.personal_activity_tag = pat.personal_activity_tag

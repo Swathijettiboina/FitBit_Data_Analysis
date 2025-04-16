@@ -2,7 +2,7 @@
     {% set aggregation_query %}
         SELECT
             ID AS user_id,
-            DATE_TRUNC('minute', {{ timestamp_column }}) AS activity_minute,  -- Truncate based on the passed timestamp column
+            DATE_TRUNC('minute', {{ timestamp_column }}) AS activity_minute,  
             AVG({{ column_name }}) AS avg_{{ renamed_column_name or column_name }},
             MIN({{ column_name }}) AS min_{{ renamed_column_name or column_name }},
             MAX({{ column_name }}) AS max_{{ renamed_column_name or column_name }},

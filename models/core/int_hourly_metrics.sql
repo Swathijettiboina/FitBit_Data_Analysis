@@ -7,17 +7,14 @@
 }}
 
 WITH 
--- Aggregating Calories data
 aggregated_calories AS (
     {{ aggregate_single_table('stg_hourlycalories', 'CALORIES', time_granularity='hour', renamed_column_name='calories') }}
 ),
 
--- Aggregating Intensity data
 aggregated_intensity AS (
     {{ aggregate_single_table('stg_hourlyintensities', 'TOTALINTENSITY', time_granularity='hour', renamed_column_name='intensity') }}
 ),
 
--- Aggregating Steps data
 aggregated_steps AS (
     {{ aggregate_single_table('stg_hourlysteps', 'STEPTOTAL', time_granularity='hour', renamed_column_name='steps') }}
 )
@@ -29,7 +26,6 @@ SELECT
     int.avg_intensity,
     stp.avg_steps,
 
-    -- Clear Tags for Calories
     CASE
         WHEN cal.avg_calories > 500 THEN 'High Calorie Burner'
         WHEN cal.avg_calories BETWEEN 300 AND 500 THEN 'Moderate Calorie Burner'
@@ -37,7 +33,6 @@ SELECT
         ELSE 'Sedentary Calorie Burner'
     END AS calorie_burner_level,
 
-    -- Clear Tags for Steps
     CASE
         WHEN stp.avg_steps > 12000 THEN 'Highly Active Steps'
         WHEN stp.avg_steps BETWEEN 8000 AND 12000 THEN 'Moderately Active Steps'
@@ -46,7 +41,6 @@ SELECT
         ELSE 'No Steps'
     END AS step_count_level,
 
-    -- Clear Tags for Intensity
     CASE
         WHEN int.avg_intensity > 80 THEN 'High Intensity'
         WHEN int.avg_intensity BETWEEN 50 AND 80 THEN 'Moderate Intensity'

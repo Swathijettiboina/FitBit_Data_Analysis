@@ -5,7 +5,6 @@
         description="This table contains daily sleep activity data from Fitbit devices, and it has sleep quality metrics."
     )
 }}
--- models/stg_sleepday.sql
 
 WITH sleep_day AS (
     SELECT

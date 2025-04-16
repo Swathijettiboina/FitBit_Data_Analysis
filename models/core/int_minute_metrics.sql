@@ -26,13 +26,11 @@ SELECT
     cal.user_id,
     cal.activity_minute,
 
-    -- Metrics
     cal.avg_calories,
     int.avg_intensity,
     mts.avg_mets,
     stp.avg_steps,
 
-    -- Calorie Burn Tag
     CASE
         WHEN cal.avg_calories > 5 THEN 'High Calorie Burner'
         WHEN cal.avg_calories BETWEEN 3 AND 5 THEN 'Moderate Calorie Burner'
@@ -40,7 +38,6 @@ SELECT
         ELSE 'Sedentary Calorie Burner'
     END AS calorie_burner_level,
 
-    -- Intensity Tag
     CASE
         WHEN int.avg_intensity > 8 THEN 'High Intensity'
         WHEN int.avg_intensity BETWEEN 5 AND 8 THEN 'Moderate Intensity'
@@ -48,7 +45,6 @@ SELECT
         ELSE 'Very Low Intensity'
     END AS intensity_level,
 
-    -- Steps Tag
     CASE
         WHEN stp.avg_steps > 20 THEN 'Highly Active Steps'
         WHEN stp.avg_steps BETWEEN 10 AND 20 THEN 'Moderately Active Steps'
@@ -57,7 +53,6 @@ SELECT
         ELSE 'No Steps'
     END AS step_count_level,
 
-    -- Combined Personal Activity Tag
     CASE
         WHEN cal.avg_calories > 5 AND stp.avg_steps > 20 AND int.avg_intensity > 8 THEN 'Extremely Active'
         WHEN cal.avg_calories BETWEEN 3 AND 5 AND stp.avg_steps BETWEEN 10 AND 20 AND int.avg_intensity BETWEEN 5 AND 8 THEN 'Moderately Active'

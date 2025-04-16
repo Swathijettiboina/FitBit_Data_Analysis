@@ -1,0 +1,200 @@
+version: 2
+
+models:
+  - name: report_minute_activity_analysis
+    description: "This model aggregates minute-level activity data from the FitBit dataset. It provides insights into the average number of steps, calories burned, and distance covered per minute for each user. The data is grouped by user ID and minute of the day."
+    columns:
+      - name: user_id
+        description: "Unique identifier for each user in the FitBit dataset."
+        tests:
+          - not_null
+      - name: activity_minute
+        description: "The minute of the day in the timestamp format."
+        tests:
+          - not_null
+      - name: avg_calories
+        description: "The average number of calories burned by the user during the minute."
+      - name: avg_intensity
+        description: "The average intensity of the user's activity during the minute."
+      - name: avg_mets
+        description: "The average metabolic equivalent of task (MET) value for the user's activity during the minute."
+      - name: avg_steps
+        description: "The average number of steps taken by the user during the minute."
+      - name: calorie_burn_level
+        description: "The level of calorie burn during the minute, categorized as 'low', 'medium', or 'high'."
+        tests:
+          - accepted_values:
+              values: ['Sedentary Calorie Burner', 'Low Calorie Burner', 'Moderate Calorie Burner','High Calorie Burner']
+      - name: step_count_level
+        description: "The level of step count during the minute, categorized as 'No Steps', 'Sedentary Active Steps', 'Lightly Active Steps', 'Moderately Active Steps', or 'Highly Active Steps'."
+        tests:
+          - accepted_values:
+              values: ['No Steps', 'Sedentary Active Steps', 'Lightly Active Steps', 'Moderately Active Steps', 'Highly Active Steps']
+      - name: intensity_level
+        description: "The level of activity intensity during the minute, categorized as 'Very Low Intensity', 'Low Intensity', 'Moderate Intensity', or 'High Intensity'."
+        tests:
+          - accepted_values:
+              values: ['Very Low Intensity', 'Low Intensity', 'Moderate Intensity', 'High Intensity']
+      - name: personal_activity_tag
+        description: "A tag indicating the user's personal activity level, categorized as 'Sedentary', 'Lightly Active', 'Moderately Active', or 'Extremely Active'."
+        tests:
+          - accepted_values:
+              values: ['Sedentary Active', 'Lightly Active', 'Moderately Active', 'Extremely Active']
+      - name: avg_heart_rate
+        description: "The average heart rate of the user during the minute."
+      - name: min_heart_rate
+        description: "The minimum heart rate of the user during the minute."
+      - name: max_heart_rate
+        description: "The maximum heart rate of the user during the minute."
+      - name: heart_rate_readings
+        description: "The number of heart rate readings taken during the minute."
+      - name: heart_rate_zone
+        description: "The heart rate zone of the user during the minute, categorized as 'Resting', 'Fat Burn', 'Cardio', or 'Peak'."
+        tests:
+          - accepted_values:
+              values: ['Resting', 'Fat Burn', 'Cardio', 'Peak']
+      - name: calories_burnerd_per_step
+        description: "The number of calories burned per step taken by the user during the minute."
+    
+
+  - name: report_hourly_activity_analysis
+    description: "This model aggregates hourly activity data from the FitBit dataset. It provides insights into the average number of steps, calories burned, and distance covered per hour for each user. The data is grouped by user ID and hour of the day."
+    columns:
+      - name: user_id
+        description: "Unique identifier for each user in the FitBit dataset."
+        tests:
+          - not_null
+      - name: activity_hour
+        description: "The hour of the day in the timestamp format."
+        tests:
+          - not_null
+      - name: avg_steps
+        description: "The average number of steps taken by the user during the hour."
+      - name: avg_calories
+        description: "The average number of calories burned by the user during the hour." 
+      - name: avg_intensity
+        description: "The average intensity of the user's activity during the hour."
+      - name: calorie_burn_level
+        description: "The level of calorie burn during the hour, categorized as 'low', 'medium', or 'high'."
+        tests:
+          - accepted_values:
+              values: ['Sedentary Calorie Burner', 'Low Calorie Burner', 'Moderate Calorie Burner','High Calorie Burner']
+      - name: step_count_level
+        description: "The level of step count during the hour, categorized as 'No Steps', 'Sedentary Active Steps', 'Lightly Active Steps', 'Moderately Active Steps', or 'Highly Active Steps'."
+        tests:
+          - accepted_values:
+              values: ['No Steps', 'Sedentary Active Steps', 'Lightly Active Steps', 'Moderately Active Steps', 'Highly Active Steps']
+      - name: intensity_level
+        description: "The level of activity intensity during the hour, categorized as 'Very Low Intensity', 'Low Intensity', 'Moderate Intensity', or 'High Intensity'."
+        tests:
+          - accepted_values:
+              values: ['Very Low Intensity', 'Low Intensity', 'Moderate Intensity', 'High Intensity']
+      - name: personal_activity_tag
+        description: "A tag indicating the user's personal activity level, categorized as 'Sedentary', 'Lightly Active', 'Moderately Active', or 'Extremely Active'."
+        tests:
+          - accepted_values:
+              values: ['Sedentary Active', 'Lightly Active', 'Moderately Active', 'Extremely Active']
+
+  - name: report_sleep_weight_analysis
+    description: "This model aggregates sleep and weight data from the FitBit dataset. It provides insights into the user's sleep patterns, weight trends, and health status. The data is grouped by user ID and date."
+    columns:
+      - name: user_id
+        description: "Unique identifier for each user in the FitBit dataset."
+        tests:
+          - not_null
+      - name: activity_date
+        description: "The date of the activity in the timestamp format."
+        tests:
+          - not_null
+      - name: total_sleep_records
+        description: "The total number of sleep records for the user on the given date."
+      - name: total_minutes_asleep
+        description: "The total number of minutes the user was asleep on the given date."
+      - name: total_time_in_bed
+        description: "The total time spent in bed by the user on the given date."
+      - name: sleep_efficiency
+        description: "The efficiency of the user's sleep, calculated as a percentage."
+      - name: health_status
+        description: "The health status of the user, categorized as 'Healthy', 'Unhealthy', or 'At Risk'."
+        tests:
+          - accepted_values:
+              values: ['Healthy', 'Unhealthy', 'At Risk']
+      - name: avg_weight_kg
+        description: "The average weight of the user in kilograms."
+      - name: avg_bmi_score
+        description: "The average Body Mass Index (BMI) score of the user."
+      - name: weight_trend
+        description: "The trend of the user's weight, categorized as 'Gaining', 'Losing', or 'Stable'."
+      - name: days_since_previous
+        description: "The number of days since the user's previous weight record."
+      - name: prev_weight
+        description: "The previous weight of the user in kilograms."
+
+  - name: report_daily_activity_analysis
+    description: "This model aggregates daily activity data from the FitBit dataset. It provides insights into the user's daily activity levels, including steps taken, calories burned, and distance covered. The data is grouped by user ID and date."
+    columns: 
+      - name: user_id
+        description: "Unique identifier for each user in the FitBit dataset."
+        tests:
+          - not_null
+      - name: activity_date
+        description: "The date of the activity in the timestamp format."
+        tests:
+          - not_null
+      - name: total_steps
+        description: "The total number of steps taken by the user on the given date."
+      - name: total_distance_km
+        description: "The total distance covered by the user in kilometers on the given date."
+      - name: tracker_distance_km
+        description: "The distance covered by the user's tracker in kilometers on the given date."
+      - name: logged_activities_distance_km
+        description: "The distance covered by logged activities in kilometers on the given date."
+      - name: very_active_distance_km
+        description: "The distance covered during very active periods in kilometers on the given date."
+      - name: moderate_activity_distance_km
+        description: "The distance covered during moderate activity periods in kilometers on the given date."
+      - name: light_activity_distance_km
+        description: "The distance covered during light activity periods in kilometers on the given date."
+      - name: sedentary_activity_distance_km
+        description: "The distance covered during sedentary periods in kilometers on the given date."
+      - name: moderate_activity_minutes
+        description: "The number of minutes spent in moderate activity on the given date."
+      - name: light_activity_minutes
+        description: "The number of minutes spent in light activity on the given date."
+      - name: calories_burned
+        description: "The total number of calories burned by the user on the given date."
+      - name: very_active_percent
+        description: "The percentage of time spent in very active periods on the given date."
+      - name: moderate_activity_percent
+        description: "The percentage of time spent in moderate activity periods on the given date."
+      - name: light_activity_percent
+        description: "The percentage of time spent in light activity periods on the given date."
+      - name: step_count_level
+        description: "The level of step count during the day, categorized as 'No Steps', 'Sedentary Active Steps', 'Lightly Active Steps', 'Moderately Active Steps', or 'Highly Active Steps'."
+        tests:
+          - accepted_values:
+              values: ['No Steps', 'Sedentary Active Steps', 'Lightly Active Steps', 'Moderately Active Steps', 'Highly Active Steps']
+      - name: calorie_burn_level
+        description: "The level of calorie burn during the day, categorized as 'low', 'medium', or 'high'."
+        tests:
+          - accepted_values:
+              values: ['Sedentary Calorie Burner', 'Low Calorie Burner', 'Moderate Calorie Burner','High Calorie Burner']
+      - name: personal_activity_tag
+        description: "A tag indicating the user's personal activity level, categorized as 'Sedentary', 'Lightly Active', 'Moderately Active', or 'Extremely Active'."
+        tests:
+          - accepted_values:
+              values: ['Sedentary Active', 'Lightly Active', 'Moderately Active', 'Extremely Active']
+      - name: total_calories
+        description: "The total number of calories burned by the user on the given date."
+      - name: lightly_active_minutes
+        description: "The number of minutes spent in lightly active periods on the given date."
+      - name: fairly_active_minutes
+        description: "The number of minutes spent in fairly active periods on the given date."
+      - name: very_active_minutes
+        description: "The number of minutes spent in very active periods on the given date."   
+      - name: sedentary_minutes
+        description: "The number of minutes spent in sedentary periods on the given date."
+      - name: active_minutes_total
+        description: "The total number of active minutes on the given date."
+      - name: calories_per_step
+        description: "The number of calories burned per step taken by the user on the given date."

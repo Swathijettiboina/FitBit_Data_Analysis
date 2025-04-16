@@ -7,7 +7,6 @@
         {% elif time_granularity == 'day' %}
             DATE_TRUNC('day', ACTIVITYHOUR)  -- Truncates to the day
         {% else %}
-            -- Default to hour if an invalid time granularity is provided
             DATE_TRUNC('hour', ACTIVITYHOUR)
         {% endif %}
     {% endset %}

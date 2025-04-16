@@ -31,7 +31,7 @@ weight_with_trend AS (
     SELECT
         *,
         CASE
-            WHEN prev_date IS NULL THEN 0  -- First record
+            WHEN prev_date IS NULL THEN 0 
             ELSE DATEDIFF('day', prev_date, record_date)
         END AS days_since_previous,
         ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY record_date) AS record_num
