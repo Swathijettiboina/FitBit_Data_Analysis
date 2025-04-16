@@ -1,31 +1,32 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table',
+    tags=['mart', 'fact_daily_activity','fact'],
+    description="This table contains daily activity data for each user, including steps, calories burned, and distance traveled.",
+    unique_key='user_id'
+) }}
 
 SELECT
-    a.USER_ID,
-    a.ACTIVITY_DATE,
-    u.USER_ID AS user_id,
-    c.DATE_KEY AS activity_date_key,
-    a.TOTAL_STEPS,
-    a.TOTAL_DISTANCE_KM,
-    a.TRACKER_DISTANCE_KM,
-    a.LOGGED_ACTIVITIES_DISTANCE_KM,
-    a.VERY_ACTIVE_DISTANCE_KM,
-    a.MODERATE_ACTIVITY_DISTANCE_KM,
-    a.LIGHT_ACTIVITY_DISTANCE_KM,
-    a.SEDENTARY_ACTIVITY_DISTANCE_KM,
-    a.VERY_ACTIVE_MINUTES,
-    a.MODERATE_ACTIVITY_MINUTES,
-    a.LIGHT_ACTIVITY_MINUTES,
-    a.SEDENTARY_MINUTES,
-    a.CALORIES_BURNED,
-    a.VERY_ACTIVE_PERCENT,
-    a.MODERATE_ACTIVITY_PERCENT,
-    a.LIGHT_ACTIVITY_PERCENT,
-    a.STEPS_PER_KM,
-    a.STEP_BASED_ACTIVITY_LEVEL,
-    a.WORKOUT_INTENSITY,
-    a.CALORIES_PER_KM,
-    a.TOTAL_ACTIVE_MINUTES
-FROM {{ ref('int_daily_activity') }} a
-JOIN {{ ref('dim_users') }} u ON a.USER_ID = u.USER_ID
-JOIN {{ ref('dim_calendar') }} c ON a.ACTIVITY_DATE = c.DATE
+    u.user_id,
+    c.date AS activity_date,
+    da.total_steps,
+    da.total_distance_km,
+    da.tracker_distance_km,
+    da.logged_activities_distance_km,
+    da.very_active_distance_km,
+    da.moderate_activity_distance_km,
+    da.light_activity_distance_km,
+    da.sedentary_activity_distance_km,
+    da.very_active_minutes,
+    da.moderate_activity_minutes,
+    da.light_activity_minutes,
+    da.sedentary_minutes,
+    da.calories_burned,
+    da.very_active_percent,
+    da.moderate_activity_percent,
+    da.light_activity_percent,
+    s.step_count_level_id,
+    calorie.calorie_level_id
+FROM {{ ref('int_daily_activity') }} da
+JOIN {{ ref('dim_users') }} u ON da.user_id = u.user_id
+JOIN {{ ref('dim_calendar') }} c ON da.activity_date = c.date
+JOIN {{ ref('dim_step_count_level') }} s ON da.step_count_level = s.step_count_level
+JOIN {{ ref('dim_calorie_burn_level') }} calorie ON da.calorie_burner_level = calorie.calorie_burn_level

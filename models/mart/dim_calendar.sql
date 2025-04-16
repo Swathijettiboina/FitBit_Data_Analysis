@@ -1,7 +1,7 @@
 {{
     config(
         materialized='incremental',
-        tags=['silver', 'calendar', 'dim'],
+        tags=['silver', 'calendar', 'dim', 'mart'],
         description='Calendar dimension with full timestamps down to the minute level, and hour/minute references.'
     )
 }}
@@ -47,4 +47,10 @@ FROM datetime_series
 
 {% if is_incremental() %}
     WHERE minute_timestamp > (SELECT MAX(minute_timestamp) FROM {{ this }})
+{% endif %}
+
+{% if is_incremental() %}
+    {% do log("Incremental load: New records added to the calendar dimension.", info=True) %}
+{% else %}
+    {% do log("Full refresh: Calendar dimension has been fully refreshed.", info=True) %}
 {% endif %}

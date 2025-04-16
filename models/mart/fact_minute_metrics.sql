@@ -1,22 +1,39 @@
-{{ config(materialized='table') }}
+{{
+    config(
+        materialized='table',
+        tags=['fact_minute_metrics','mart','fact', 'metrics'],
+        description="This table contains minute-level metrics data from Fitbit, including calories burned, intensity, METs, and step counts."
+    )
+}}
 
 SELECT
-    a.USER_ID,
-    a.ACTIVITY_MINUTE,
-    u.USER_ID AS user_id,
-    c.DATE_KEY AS activity_date_key,
-    t.HOUR_OF_DAY AS activity_hour,
-    t.MINUTE_OF_HOUR AS activity_minute,
-    a.AVG_CALORIES,
-    a.AVG_INTENSITY,
-    a.AVG_METS,
-    a.AVG_STEPS,
-    a.CALORIE_BURN_TAG,
-    i.intensity_id AS intensity_id,
-    a.STEP_ACTIVITY_TAG,
-    a.PERSONAL_ACTIVITY_TAG
-FROM {{ ref('int_minute_metrics') }} a
-JOIN {{ ref('dim_users') }} u ON a.USER_ID = u.USER_ID
-JOIN {{ ref('dim_calendar') }} c ON CAST(a.ACTIVITY_MINUTE AS DATE) = c.DATE
-JOIN {{ ref('dim_time') }} t ON EXTRACT(HOUR FROM a.ACTIVITY_MINUTE) = t.HOUR_OF_DAY
-JOIN {{ ref('dim_intensity') }} i ON a.INTENSITY_TAG = i.intensity_level
+    u.user_id,
+    c.minute_timestamp AS activity_minute,
+    mm.avg_calories,
+    mm.avg_intensity,
+    mm.avg_mets,
+    mm.avg_steps,
+    cbl.calorie_level_id,
+    scl.step_count_level_id,
+    il.intensity_level_id,
+    pat.personal_activity_tag_id
+FROM 
+    {{ ref('int_minute_metrics') }} mm
+JOIN 
+    {{ ref('dim_users') }} u 
+    ON mm.user_id = u.user_id
+JOIN 
+    {{ ref('dim_calendar') }} c 
+    ON mm.activity_minute = c.minute_timestamp
+JOIN 
+    {{ ref('dim_calorie_burn_level') }} cbl 
+    ON mm.calorie_burner_level = cbl.calorie_burn_level
+JOIN 
+    {{ ref('dim_step_count_level') }} scl 
+    ON mm.step_count_level = scl.step_count_level
+JOIN 
+    {{ ref('dim_intensity_level') }} il 
+    ON mm.intensity_level = il.intensity_level
+JOIN 
+    {{ ref('dim_personal_activity_tag') }} pat 
+    ON mm.personal_activity_tag = pat.personal_activity_tag

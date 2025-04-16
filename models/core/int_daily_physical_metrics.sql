@@ -62,11 +62,11 @@ SELECT
     )                                                  AS calories_per_step,
 
     CASE
-        WHEN COALESCE(ds.steps_daily, da.steps_total) >= 10000 THEN 'highly_active'
-        WHEN COALESCE(ds.steps_daily, da.steps_total) >= 7500  THEN 'moderately_active'
-        WHEN COALESCE(ds.steps_daily, da.steps_total) >= 5000  THEN 'lightly_active'
-        ELSE                                                       'sedentary'
-    END                                               AS activity_level
+        WHEN COALESCE(ds.steps_daily, da.steps_total) >= 10000 THEN 'Extreamly Active'
+        WHEN COALESCE(ds.steps_daily, da.steps_total) >= 7500  THEN 'Moderately Active'
+        WHEN COALESCE(ds.steps_daily, da.steps_total) >= 5000  THEN 'Lightly Active'
+        ELSE                                                       'Sedentary Active'
+    END                                               AS personal_activity_tag
 
 FROM daily_activity da
 LEFT JOIN daily_calories dc 

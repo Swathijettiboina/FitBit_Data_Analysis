@@ -34,17 +34,17 @@ SELECT
         WHEN cal.avg_calories > 500 THEN 'High Calorie Burner'
         WHEN cal.avg_calories BETWEEN 300 AND 500 THEN 'Moderate Calorie Burner'
         WHEN cal.avg_calories BETWEEN 100 AND 300 THEN 'Low Calorie Burner'
-        ELSE 'Sedentary'
-    END AS calorie_burn_tag,
+        ELSE 'Sedentary Calorie Burner'
+    END AS calorie_burner_level,
 
     -- Clear Tags for Steps
     CASE
-        WHEN stp.avg_steps > 12000 THEN 'Highly Active'
-        WHEN stp.avg_steps BETWEEN 8000 AND 12000 THEN 'Moderately Active'
-        WHEN stp.avg_steps BETWEEN 4000 AND 8000 THEN 'Lightly Active'
-        WHEN stp.avg_steps > 0 THEN 'Sedentary'
-        ELSE 'No Activity'
-    END AS step_activity_tag,
+        WHEN stp.avg_steps > 12000 THEN 'Highly Active Steps'
+        WHEN stp.avg_steps BETWEEN 8000 AND 12000 THEN 'Moderately Active Steps'
+        WHEN stp.avg_steps BETWEEN 4000 AND 8000 THEN 'Lightly Active Steps'
+        WHEN stp.avg_steps > 0 THEN 'Sedentary Active Steps'
+        ELSE 'No Steps'
+    END AS step_count_level,
 
     -- Clear Tags for Intensity
     CASE
@@ -52,13 +52,13 @@ SELECT
         WHEN int.avg_intensity BETWEEN 50 AND 80 THEN 'Moderate Intensity'
         WHEN int.avg_intensity BETWEEN 30 AND 50 THEN 'Low Intensity'
         ELSE 'Very Low Intensity'
-    END AS intensity_tag,
+    END AS intensity_level,
 
     CASE
         WHEN cal.avg_calories > 500 AND stp.avg_steps > 12000 AND int.avg_intensity > 80 THEN 'Extremely Active'
         WHEN cal.avg_calories BETWEEN 300 AND 500 AND stp.avg_steps BETWEEN 8000 AND 12000 AND int.avg_intensity BETWEEN 50 AND 80 THEN 'Moderately Active'
         WHEN cal.avg_calories BETWEEN 100 AND 300 AND stp.avg_steps BETWEEN 4000 AND 8000 AND int.avg_intensity BETWEEN 30 AND 50 THEN 'Lightly Active'
-        ELSE 'Inactive'
+        ELSE 'Sedentary Active'
     END AS personal_activity_tag
 
 FROM aggregated_calories cal

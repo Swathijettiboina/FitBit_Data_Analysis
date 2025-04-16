@@ -1,7 +1,7 @@
 {{
   config(
     materialized='table',
-    tags=['daily_activity', 'metrics','core_daily'],
+    tags=['daily_activity', 'metrics','core_daily']
   )
 }}
 
@@ -61,18 +61,18 @@ SELECT
     
     COALESCE(da.total_steps / NULLIF(da.total_distance_km, 0), 0) AS steps_per_km,
     CASE
-        WHEN da.total_steps >= 10000 THEN 'Highly Active'
-        WHEN da.total_steps >= 7500 THEN 'Moderately Active'
-        WHEN da.total_steps >= 5000 THEN 'Lightly Active'
-        ELSE 'Sedentary'
-    END AS step_based_activity_level,
-    
+        WHEN da.total_steps >= 10000 THEN 'Highly  Active Steps'
+        WHEN da.total_steps >= 7500 THEN 'Moderately Active Steps'
+        WHEN da.total_steps >= 5000 THEN 'Lightly Active Steps'
+        WHEN da.total_steps > 0 THEN 'Sedentary Active Steps'
+        ELSE 'No Steps'
+    END AS step_count_level,
     CASE
-        WHEN da.calories_burned >= 500 THEN 'Intense Workout'
-        WHEN da.calories_burned >= 300 THEN 'Moderate Workout'
-        WHEN da.calories_burned >= 100 THEN 'Light Activity'
-        ELSE 'Minimal Activity'
-    END AS workout_intensity,
+        WHEN da.calories_burned >= 500 THEN 'High Calorie Burner'
+        WHEN da.calories_burned >= 300 THEN 'Moderate Calorie Burner'
+        WHEN da.calories_burned >= 100 THEN 'Low Calorie Burner'
+        ELSE 'Sedentary Calorie Burner'
+    END AS calorie_burner_level,
     COALESCE(ROUND(da.calories_burned / NULLIF(da.total_distance_km, 0), 1), 0)                      AS calories_per_km,
     COALESCE((da.very_active_minutes + da.moderate_activity_minutes + da.light_activity_minutes), 0) AS total_active_minutes,
 

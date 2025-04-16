@@ -1,20 +1,29 @@
-{{ config(materialized='table') }}
+{{
+    config(
+        materialized='table',
+        unique_key='id',
+        tags=['fact', 'daily', 'physical', 'metrics',"dpm",'mart'],
+        description="This table contains daily physical metrics data from Fitbit."
+    )
+}}
 
-SELECT
-    a.USER_ID,
-    a.ACTIVITY_DATE,
-    u.USER_ID AS user_id,
-    c.DATE_KEY AS activity_date_key,
-    a.TOTAL_STEPS,
-    a.TOTAL_CALORIES,
-    a.LIGHTLY_ACTIVE_MINUTES,
-    a.FAIRLY_ACTIVE_MINUTES,
-    a.VERY_ACTIVE_MINUTES,
-    a.SEDENTARY_MINUTES,
-    a.ACTIVE_MINUTES_TOTAL,
-    a.CALORIES_PER_STEP,
-    al.activity_level_id AS activity_level_id
-FROM {{ ref('int_daily_physical_metrics') }} a
-JOIN {{ ref('dim_users') }} u ON a.USER_ID = u.USER_ID
-JOIN {{ ref('dim_calendar') }} c ON a.ACTIVITY_DATE = c.DATE
-JOIN {{ ref('dim_activity_level') }} al ON a.ACTIVITY_LEVEL = al.activity_level_name
+SELECT 
+    u.user_id,
+    c.date AS activity_date,
+    dp.total_steps,
+    dp.total_calories,
+    dp.lightly_active_minutes,
+    dp.fairly_active_minutes,
+    dp.very_active_minutes,
+    dp.sedentary_minutes,
+    dp.active_minutes_total,
+    dp.calories_per_step,
+    pat.personal_activity_tag_id
+FROM 
+    {{ ref('int_daily_physical_metrics') }} dp
+JOIN 
+    {{ ref('dim_users') }} u ON dp.user_id = u.user_id
+JOIN 
+    {{ ref('dim_calendar') }} c ON dp.activity_date = c.date
+JOIN 
+    {{ ref('dim_personal_activity_tag') }} pat ON dp.personal_activity_tag = pat.personal_activity_tag

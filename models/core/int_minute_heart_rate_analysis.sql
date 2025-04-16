@@ -28,11 +28,14 @@ SELECT
 
     -- Derived metrics
     CASE
-        WHEN h.avg_heart_rate BETWEEN 0 AND 59    THEN 'resting'
-        WHEN h.avg_heart_rate BETWEEN 60 AND 99   THEN 'light'
-        WHEN h.avg_heart_rate BETWEEN 100 AND 139 THEN 'moderate'
-        WHEN h.avg_heart_rate >= 140              THEN 'intense'
-        ELSE NULL
+        WHEN h.avg_heart_rate BETWEEN 0 AND 59    THEN 'Resting'
+        WHEN h.avg_heart_rate BETWEEN 60 AND 79   THEN 'Warm-up'
+        WHEN h.avg_heart_rate BETWEEN 80 AND 99   THEN 'Fat Burn'
+        WHEN h.avg_heart_rate BETWEEN 100 AND 119 THEN 'Cardio'
+        WHEN h.avg_heart_rate BETWEEN 120 AND 139 THEN 'Peak'
+        WHEN h.avg_heart_rate >= 140              THEN 'Max'
+        ELSE 'Unknown'
+
     END AS heart_rate_zone,
 
     ROUND(COALESCE(c.calories, 0) / 
